@@ -1,7 +1,18 @@
-@(message: String)
+@(feeds: List[Feed], feedForm: Form[String])
 
-@main("Welcome to Play 2.0") {
-    
-    @play20.welcome(message)
-    
+@import helper._
+
+@main("Feeds") {
+    <h1>@feeds.size feed(s)</h1>
+    <ul>
+        @feeds.map { feed =>
+            <li>@feed.label</li>
+        }
+    </ul>
+
+    <h2>add feed</h2>
+    @form(routes.Application.newFeed) {
+        @inputText(feedForm("label"))
+        <input type="submit" value="Create">
+    }
 }
